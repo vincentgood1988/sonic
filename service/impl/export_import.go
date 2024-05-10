@@ -270,6 +270,7 @@ func (e *exportImport) ExportMarkdown(ctx context.Context, needFrontMatter bool)
 		if err != nil {
 			return "", xerr.WithStatus(err, xerr.StatusInternalServerError).WithMsg("create file err")
 		}
+		defer file.Close()
 		_, err = file.WriteString(markdown.String())
 		if err != nil {
 			return "", xerr.WithStatus(err, xerr.StatusInternalServerError).WithMsg("write file err")
